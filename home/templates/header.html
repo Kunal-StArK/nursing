@@ -34,7 +34,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="brand">
+    <a href="{% url 'home' %}" class="brand">
       <span class="mark">S</span>
       <span>
         <span class="name">Suganti <em>Nursing Home</em></span><br>
@@ -52,12 +52,28 @@
       <a href="{% url 'contacts' %}">Contact</a>
     </nav>
 
+    {% if not user.is_authenticated %}
     <div class="header-actions">
-      <a href="contact.html" class="btn btn-primary">Book Appointment</a>
+      <a href="#" class="btn btn-primary">Book Appointment</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
     </div>
+    <div class="header-actions">
+      <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    {% else %}
+    <span> Your are logged in as {{ user }}</span>
+    <div class="header-actions">
+      <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    {% endif %}
   </div>
 </header>
 <!-- ===========================================================
