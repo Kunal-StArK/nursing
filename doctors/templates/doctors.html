@@ -21,8 +21,11 @@
         <div class="card h-100">
         <div class="card-body">
         <div class="doctor-photo">
+          {% if d.doctor_img %}
+              <img src="{{ d.doctor_img.url }}" class="card-img-top img-fluid" style="height: 300px; object-fit: cover;" alt="d.doctor_name">
+          {% endif %}
         </div>
-        <div class="doctor-info">
+        <div class="doctor-info pt-5">
           <h3>{{ d.doctor_name }}</h3><span class="role">{{ d.doctor_specialist }}</span>
           <p>{{ d.doctor_experience }}</p>
         </div>
