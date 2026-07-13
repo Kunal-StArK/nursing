@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+    {% block content %}
+
+<!-- HEADER GOES HERE — paste header.html content -->
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">Home / <span>Departments</span></div>
+    <h1>Our Departments</h1>
+    <p>Specialist-led departments equipped to diagnose, treat and support recovery — all under one roof.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-3">
+      <div class="card"><div class="icon">❤️</div><h3>Cardiology</h3><p>Heart screenings, ECG, angiography and long-term management of cardiac conditions.</p></div>
+      <div class="card"><div class="icon">👶</div><h3>Pediatrics</h3><p>Vaccination, growth monitoring and treatment for infants, toddlers and children.</p></div>
+      <div class="card"><div class="icon">🤰</div><h3>Gynaecology &amp; Maternity</h3><p>Prenatal, delivery and postnatal care from experienced women's health specialists.</p></div>
+      <div class="card"><div class="icon">🦴</div><h3>Orthopaedics</h3><p>Fracture care, joint replacement and physiotherapy-led rehabilitation.</p></div>
+      <div class="card"><div class="icon">🧠</div><h3>Neurology</h3><p>Diagnosis and treatment of conditions affecting the brain and nervous system.</p></div>
+      <div class="card"><div class="icon">🩻</div><h3>Radiology &amp; Diagnostics</h3><p>X-ray, ultrasound and lab testing with fast, accurate reporting.</p></div>
+      <div class="card"><div class="icon">🔪</div><h3>General Surgery</h3><p>Minor to major surgical procedures performed by qualified surgeons.</p></div>
+      <div class="card"><div class="icon">🩺</div><h3>General Medicine</h3><p>Everyday illness, chronic disease management and preventive health check-ups.</p></div>
+      <div class="card"><div class="icon">🚑</div><h3>Emergency &amp; Trauma Care</h3><p>24/7 emergency response with on-call doctors and ambulance support.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow on-light">Details</span>
+      <h2>Department Information</h2>
+      <p>Tap a department below to see what each one covers.</p>
+    </div>
+    <details class="accordion-item" open>
+      <summary>Cardiology — Heart Care</summary>
+      <div class="acc-body">Comprehensive heart health services including ECG, stress tests, echocardiography and follow-up care for hypertension and cardiac disease.</div>
+    </details>
+    <details class="accordion-item">
+      <summary>Gynaecology &amp; Maternity</summary>
+      <div class="acc-body">Full antenatal care, safe delivery services, and postnatal support for mother and newborn, led by experienced obstetricians.</div>
+    </details>
+    <details class="accordion-item">
+      <summary>Orthopaedics — Bone &amp; Joint Care</summary>
+      <div class="acc-body">Treatment for fractures, arthritis, sports injuries and joint replacement, supported by an in-house physiotherapy team.</div>
+    </details>
+    <details class="accordion-item">
+      <summary>Emergency &amp; Trauma Care</summary>
+      <div class="acc-body">Round-the-clock emergency department with rapid-response ambulance service and a dedicated trauma care team.</div>
+    </details>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h3>Not Sure Which Department You Need?</h3>
+        <p>Call our front desk and we'll guide you to the right specialist.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-outline">Book Appointment</a>
+        <a href="tel:+919876543210" class="btn btn-coral">📞 Call Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER GOES HERE — paste footer.html content -->
+{% endblock %}

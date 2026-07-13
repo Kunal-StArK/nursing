@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+    {% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">Home / <span>About Us</span></div>
+    <h1>About Suganti Nursing Home</h1>
+    <p>Eighteen years of compassionate, dependable healthcare — built one patient relationship at a time.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <div>
+      <span class="eyebrow on-light">Our Story</span>
+      <h2>{{ story.story_title }}</h2>
+      <p>{{ story.story_discription }}</p>
+      <div class="pulse"><svg viewBox="0 0 140 22"><path d="M0 11 H40 L48 2 L56 20 L64 4 L70 11 H140"/></svg><span class="pulse-label">Caring since day one</span></div>
+    </div>
+    <div class="split-media">🏥</div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>Our Mission</h3>
+        <p>To deliver accessible, high-quality healthcare with honesty and compassion — treating every patient as we would a member of our own family.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🌱</div>
+        <h3>Our Vision</h3>
+        <p>To be the most trusted nursing home in the region, known equally for clinical excellence and genuine patient care.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow on-light">Our Values</span>
+      <h2>What Guides Every Decision We Make</h2>
+    </div>
+    <div class="grid grid-4">
+      <div class="card"><div class="icon">🤝</div><h3>Compassion</h3><p>Every patient is treated with empathy, dignity and patience.</p></div>
+      <div class="card"><div class="icon">🔬</div><h3>Excellence</h3><p>Modern equipment and continuous medical training.</p></div>
+      <div class="card"><div class="icon">🔒</div><h3>Integrity</h3><p>Honest diagnosis and transparent, fair billing.</p></div>
+      <div class="card"><div class="icon">⏱️</div><h3>Reliability</h3><p>24/7 emergency response, every single day.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-navy section-tight">
+  <div class="container stats">
+    <div><div class="stat-num" data-count="18">{{ hospitalstats.year_of_service }}</div><div class="stat-label">Years of Service</div></div>
+    <div><div class="stat-num" data-count="40" data-suffix="+">{{ hospitalstats.expert_doctors }}</div><div class="stat-label">Expert Doctors</div></div>
+    <div><div class="stat-num" data-count="12000" data-suffix="+">{{ hospitalstats.patients_treated }}</div><div class="stat-label">Patients Treated</div></div>
+    <div><div class="stat-num" data-count="9" data-suffix="+">{{ hospitalstats.departments }}</div><div class="stat-label">Departments</div></div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h3>Want to Know More?</h3>
+        <p>Get in touch with our team — we're happy to answer any questions about your care.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-outline">Contact Us</a>
+        <a href="doctors.html" class="btn btn-coral">Meet Our Doctors</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER GOES HERE — paste footer.html content -->
+
+{% endblock %}

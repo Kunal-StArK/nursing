@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+    {% block content %}
+
+<!-- HEADER GOES HERE — paste header.html content -->
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">Home / <span>Services</span></div>
+    <h1>Our Services</h1>
+    <p>From emergency response to long-term care, every service is designed around your comfort and recovery.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-3">
+      <div class="card"><div class="icon">🚑</div><h3>24/7 Emergency Care</h3><p>Round-the-clock emergency department with rapid ambulance dispatch.</p></div>
+      <div class="card"><div class="icon">🛏️</div><h3>In-Patient Wards</h3><p>Clean, comfortable private and shared rooms with round-the-clock nursing.</p></div>
+      <div class="card"><div class="icon">🔪</div><h3>Surgical Care</h3><p>Modern operation theatres for minor and major surgical procedures.</p></div>
+      <div class="card"><div class="icon">🩻</div><h3>Diagnostics &amp; Lab</h3><p>On-site X-ray, ultrasound and pathology lab with same-day reports.</p></div>
+      <div class="card"><div class="icon">💊</div><h3>Pharmacy</h3><p>In-house pharmacy stocked with prescribed medication, open daily.</p></div>
+      <div class="card"><div class="icon">🧑‍⚕️</div><h3>Physiotherapy</h3><p>Recovery and rehabilitation programs guided by trained therapists.</p></div>
+      <div class="card"><div class="icon">🤰</div><h3>Maternity Care</h3><p>Antenatal, delivery and postnatal services in a calm, supportive setting.</p></div>
+      <div class="card"><div class="icon">🏥</div><h3>Health Check-Up Packages</h3><p>Preventive full-body screening packages for early detection.</p></div>
+      <div class="card"><div class="icon">🚐</div><h3>Ambulance Service</h3><p>Dedicated fleet for emergency pickup and inter-hospital transfer.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container split">
+    <div>
+      <span class="eyebrow on-light">How It Works</span>
+      <h2>Getting Care Is Simple</h2>
+      <div class="pulse"><svg viewBox="0 0 140 22"><path d="M0 11 H40 L48 2 L56 20 L64 4 L70 11 H140"/></svg><span class="pulse-label">Three steps to care</span></div>
+      <ul style="color:var(--ink-soft);">
+        <li style="margin-bottom:14px;"><strong style="color:var(--navy-deep);">1. Book</strong> — Call us or fill the appointment form online.</li>
+        <li style="margin-bottom:14px;"><strong style="color:var(--navy-deep);">2. Consult</strong> — Meet your specialist for examination and diagnosis.</li>
+        <li style="margin-bottom:14px;"><strong style="color:var(--navy-deep);">3. Recover</strong> — Follow a clear treatment plan with our continued support.</li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary">Book Appointment</a>
+    </div>
+    <div class="split-media">🩺</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h3>Looking for a Specific Service?</h3>
+        <p>Speak to our front desk and we'll connect you with the right department.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="departments.html" class="btn btn-outline">View Departments</a>
+        <a href="tel:+919876543210" class="btn btn-coral">📞 Call Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER GOES HERE — paste footer.html content -->
+
+{% endblock %}
