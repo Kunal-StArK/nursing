@@ -9,3 +9,5 @@ class Doctors(models.Model):
     doctor_img = models.ImageField(upload_to='uploads', null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    added_by = models.CharField(max_length=100, null=True, blank=True)    #which user added patient
+    created_at = models.DateTimeField(auto_now_add=True)                  #with time
