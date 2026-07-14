@@ -24,7 +24,7 @@ urlpatterns = [
     path('',include('home.urls')),
     path('',include('doctors.urls')),
     path('',include('about.urls')),
-    path('',include('account.urls')),
+    path('account/',include('account.urls')),
 ]+ static(
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
