@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">Edit Patient Details</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Patient Name</label>
+                            <input type="text" name="name" class="form-file form-control" value="{{ patient.name }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Doctor Name</label>
+                            <input type="text" name="doctor_name" class="form-control" value="{{ patient.doctor_name }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <input type="text" name="department" class="form-control" value="{{ patient.department }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Admit Time</label>
+                            <input type="time" name="appointment_time" class="form-control" value="{{ patient.appointment_time|time:'H:i' }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Discharge Time</label>
+                            <input type="time" name="discharge_time" class="form-control" value="{{ patient.discharge_time|time:'H:i' }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-select form-control">
+                                <option value="Confirmed" {% if patient.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+                                <option value="Pending" {% if patient.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                <option value="Cancelled" {% if patient.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-warning text-dark font-weight-bold">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
