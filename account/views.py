@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Patient
-from .forms import PatientForm
+from .forms import PatientForm, AdduserForm , EdituserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -91,7 +91,6 @@ def edit_patient(request, pk):
 
 
 #users
-
 def users(request):
     users = User.objects.all()
     data = {
@@ -99,3 +98,24 @@ def users(request):
     }
     return render (request, 'users.html',data)
 
+def add_user(request):
+    if request.method == "POST":
+        form = AdduserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+        else:
+            print(form.errors)
+    form = AdduserForm()
+    data ={
+        'form':form,
+    }
+    return render (request,'add_user.html',data)
+
+def edit_user(request,pk):
+    user = get_object_or_404(User,pk=pk)
+    form = EdituserForm(instance=user)
+    data ={
+        'form':form,
+    }
+    return render (request,'edit_user.html',data)

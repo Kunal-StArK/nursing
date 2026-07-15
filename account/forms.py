@@ -1,5 +1,7 @@
 from django import forms
 from .models import Patient
+from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.models import User
 
 class PatientForm(forms.ModelForm):
     class Meta:
@@ -19,3 +21,38 @@ class PatientForm(forms.ModelForm):
         def __init__(self, *args, **kwargs):
             super(PatientForm, self).__init__(*args, **kwargs)
             self.fields['discharge_time'].required = False
+
+
+class AdduserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name', 
+            'last_name', 
+            'username', 
+            'email',
+            'is_active', 
+            'is_staff', 
+            'is_superuser', 
+            'groups', 
+            'user_permissions'
+        ]
+
+class EdituserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name', 
+            'last_name', 
+            'username', 
+            'email',
+            'is_active', 
+            'is_staff', 
+            'is_superuser', 
+            'groups', 
+            'user_permissions'
+        ]
+
+
+
+

@@ -9,12 +9,15 @@
 
         <!-- Main Content -->
         <div class="col-md-9 col-lg-10">
+
+            {% if perms.auth.views_user %}
+
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h2 mb-0">Users Overview</h1>
 
                 
-                <a href="{% url 'add_patient' %}" class="btn btn-warning font-weight-bold text-dark shadow-sm">
-                    +Add new Users
+                <a href="{% url 'add_user' %}" class="btn btn-warning font-weight-bold text-dark shadow-sm">
+                    Add new Users
                 </a>
             </div>
 
@@ -51,11 +54,11 @@
                                 
                                 <td class="text-center">
                                     <!-- Edit Button -->
-                                    <a href="" class="btn btn-sm btn-outline-primary me-2">
+                                    <a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-outline-primary me-2">
                                         Edit
                                     </a>
                                     <!-- Delete Button -->
-                                    <a href="" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this Patient?');">
+                                    <a href="" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this User?');">
                                         Delete
                                     </a>
                                 </td>
@@ -69,7 +72,12 @@
                     </table>
                 </div>
             </div>
-
+            {% else %}
+            <br>
+                <br>
+                <br>
+            <h2>You do not have Permission to see this page</h2>
+            {% endif %}
         </div>
     </div>
 </div>
