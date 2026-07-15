@@ -32,24 +32,26 @@ def logout(request):
     return redirect ('home')
 
 
-# Dashboard Overview
+
 @login_required(login_url='login')
-def dashboard(request):
-    # Form submission handle karne ke liye logic
+def add_patient(request):
     if request.method == 'POST':
         form = PatientForm(request.POST)
         if form.is_valid():
             patient = form.save(commit=False)
-            if request.user.is_authenticated:
-                patient.added_by = request.user.username
-            else:
-                patient.added_by = "Anonymous"
+            patient.added_by = request.user.username if request.user.is_authenticated else "Anonymous"
             patient.save()
             return redirect('dashboard')
     else:
         form = PatientForm()
-    patients = Patient.objects.all().order_by('-created_at')
     
+    return render(request, 'add_patient.html', {'form': form})
+
+
+
+@login_required(login_url='login')
+def dashboard(request):
+    patients = Patient.objects.all().order_by('-created_at')
     total_patients = patients.count()
     confirmed_appointments = patients.filter(status='Confirmed').count()
     pending_appointments = patients.filter(status='Pending').count()
@@ -59,7 +61,6 @@ def dashboard(request):
         'total_patients': total_patients,
         'confirmed_appointments': confirmed_appointments,
         'pending_appointments': pending_appointments,
-        'form': form, 
     }
     return render(request, 'dashboard.html', context)
 
@@ -70,13 +71,13 @@ def delete_patient(request, pk):
     patient.delete()
     return redirect('dashboard')
 
+
 # 3. Edit Patient View (Direct update karne ke liye simple view)
 @login_required(login_url='login')
 def edit_patient(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
-    
     if request.method == "POST":
-        patient.name = request.POST.get('name')
+        patient.Patient_name = request.POST.get('name')  
         patient.doctor_name = request.POST.get('doctor_name')
         patient.department = request.POST.get('department')
         patient.admit_time = request.POST.get('admit_time')
