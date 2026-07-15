@@ -114,8 +114,19 @@ def add_user(request):
 
 def edit_user(request,pk):
     user = get_object_or_404(User,pk=pk)
+    if request.method == "POST":
+        form = EdituserForm(request.POST,instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
     form = EdituserForm(instance=user)
     data ={
         'form':form,
     }
     return render (request,'edit_user.html',data)
+
+
+def delete_user(request,pk):
+    user = get_object_or_404(User,pk=pk)
+    user.delete()
+    return redirect('users')

@@ -58,7 +58,7 @@
                                         Edit
                                     </a>
                                     <!-- Delete Button -->
-                                    <a href="" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this User?');">
+                                    <a href="{% url 'delete_user' user.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this User?');">
                                         Delete
                                     </a>
                                 </td>
