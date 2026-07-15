@@ -6,6 +6,7 @@ from .models import Patient
 from .forms import PatientForm, AdduserForm , EdituserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -56,12 +57,17 @@ def dashboard(request):
     total_patients = patients.count()
     confirmed_appointments = patients.filter(status='Confirmed').count()
     pending_appointments = patients.filter(status='Pending').count()
+
+    paginator = Paginator(patients, 5)  # 5  per page
+    page_number = request.GET.get("page")
+    list = paginator.get_page(page_number)
     
     context = {
         'patients': patients,
         'total_patients': total_patients,
         'confirmed_appointments': confirmed_appointments,
         'pending_appointments': pending_appointments,
+        'list': list,
     }
     return render(request, 'dashboard.html', context)
 
@@ -93,10 +99,15 @@ def edit_patient(request, pk):
 #users
 def users(request):
     users = User.objects.all()
+    paginator = Paginator(users, 5)  # 5  per page
+    page_number = request.GET.get("page")
+    list = paginator.get_page(page_number)
     data = {
         'users': users,
+        'list': list,
     }
     return render (request, 'users.html',data)
+
 
 def add_user(request):
     if request.method == "POST":
