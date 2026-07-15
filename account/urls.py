@@ -11,5 +11,8 @@ urlpatterns = [
     path('patient/add/', views.add_patient, name='add_patient'),
     path('patient/edit/<int:pk>/', views.edit_patient, name='edit_patient'),
     path('patient/delete/<int:pk>/', views.delete_patient, name='delete_patient'),
+
+    #Users
+    path('users/',views.users, name='users'),
     
 ]

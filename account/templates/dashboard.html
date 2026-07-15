@@ -64,6 +64,7 @@
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
                             <tr>
+                                <th>#</th>
                                 <th>Patient Name</th>
                                 <th>Gender</th>
                                 <th>Doctor</th>
@@ -78,6 +79,7 @@
                         <tbody>
                             {% for patient in patients %}
                             <tr>
+                                <td>{{ forloop.counter }}</td>
                                 <td>{{ patient.Patient_name }}</td>
                                 <td>{{ patient.gender }}</td>
                                 <td>{{ patient.doctor_name }}</td>

@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Patient
 from .forms import PatientForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -87,3 +88,14 @@ def edit_patient(request, pk):
         return redirect('dashboard')
         
     return render(request, 'edit_patient.html', {'patient': patient})
+
+
+#users
+
+def users(request):
+    users = User.objects.all()
+    data = {
+        'users': users,
+    }
+    return render (request, 'users.html',data)
+

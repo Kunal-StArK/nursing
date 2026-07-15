@@ -10,12 +10,13 @@
                 Dashboard
             </a>
         </div>
-        
+        {% if perms.auth.view_user %}
         <div class="list-group list-group-flush">
-            <a href="{% url 'dashboard' %}" class="list-group-item text-dark border-0 font-weight-bold">
+            <a href="{% url 'users' %}" class="list-group-item border-0 font-weight-bold {% if request.resolver_match.url_name == 'users' %} bg-warning text-white {% else %}  text-dark {% endif %}">
                 User
             </a>
         </div>
+        {% endif %}
         
         <!-- Add Patient Link -->
         <div class="list-group list-group-flush">
