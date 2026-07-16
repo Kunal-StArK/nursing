@@ -40,7 +40,7 @@ def dashboard(request):
     page_obj = paginator.get_page(page_number)
     
     context = {
-        'patients': page_obj,  # 💡 Sahi kiya: Taaki loop sirf 5 records par chale
+        'patients': page_obj,  
         'total_patients': total_patients,
         'confirmed_appointments': confirmed_appointments,
         'pending_appointments': pending_appointments,
@@ -49,7 +49,7 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 @login_required(login_url='login')
-def add_patient(request):  # 💡 Duplicate function hata kar sirf single sahi implementation rakha hai
+def add_patient(request):  
     if request.method == 'POST':
         form = PatientRegistrationForm(request.POST)
         if form.is_valid():
@@ -84,12 +84,12 @@ def delete_patient(request, pk):
 @login_required(login_url='login')
 def users(request):
     all_users = User.objects.all()
-    paginator = Paginator(all_users, 5)  # 5 per page
+    paginator = Paginator(all_users, 3)  # 3 per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
     data = {
-        'users': page_obj,  # 💡 Sahi kiya: Taaki loop sirf 5 records par chale
+        'users': page_obj,  
         'page_obj': page_obj,
     }
     return render(request, 'users.html', data)
