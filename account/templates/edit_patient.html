@@ -1,54 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load crispy_forms_tags %} <!-- Crispy forms load karein -->
 
 <div class="container-fluid py-4">
     <div class="row">
-            {% include 'sidebar.html' %}
-        
+        {% include 'sidebar.html' %}
+
         <div class="col-md-8 col-lg-9">
-    <div class="row justify-content-center mt-3">
-        <div class="col-md-6">
-            <div class="card shadow border-0">
-                <div class="card-header bg-dark text-white">
-                    <h4 class="mb-0">Edit Patient Details</h4>
-                </div>
-                <div class="card-body p-4">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label class="form-label">Patient Name</label>
-                            <input type="text" name="name" class="form-file form-control" value="{{ patient.Patient_name }}" required>
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-8">
+                    <div class="card shadow border-0">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">Edit Patient Details</h4>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Doctor Name</label>
-                            <input type="text" name="doctor_name" class="form-control" value="{{ patient.doctor_name }}" required>
+                        <div class="card-body p-4">
+                            <form method="POST">
+                                {% csrf_token %}
+
+                                <!-- Puraane saare manual inputs hata kar sirf ye line likhein -->
+                                {{ form | crispy }}
+
+                                <div class="d-flex justify-content-between mt-4">
+                                    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-warning text-dark font-weight-bold">Save
+                                        Changes</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Department</label>
-                            <input type="text" name="department" class="form-control" value="{{ patient.department }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Admit Time</label>
-                            <input type="time" name="admit_time" class="form-control" value="{{ patient.admit_time|time:'H:i' }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Discharge Time</label>
-                            <input type="time" name="discharge_time" class="form-control" value="{{ patient.discharge_time|time:'H:i' }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Status</label>
-                            <select name="status" class="form-select form-control">
-                                <option value="Confirmed" {% if patient.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
-                                <option value="Pending" {% if patient.status == 'Pending' %}selected{% endif %}>Pending</option>
-                                <option value="Cancelled" {% if patient.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
-                            </select>
-                        </div>
-                        <div class="d-flex justify-content-between mt-4">
-                            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
-                            <button type="submit" class="btn btn-warning text-dark font-weight-bold">Save Changes</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

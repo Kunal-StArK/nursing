@@ -3,25 +3,39 @@ from .models import Patient
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.models import User
 
-class PatientForm(forms.ModelForm):
+class PatientRegistrationForm(forms.ModelForm):
     class Meta:
         model = Patient
-        # Replace these fields with the actual field names present in your Patient model
-        fields = ['Patient_name', 'doctor_name','department','gender','admit_time','status'] 
+        fields = ['Patient_name', 'doctor_name', 'department', 'gender', 'admit_date', 'status'] 
 
         widgets = {
             'Patient_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Patient Full Name'}),
             'gender': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., Male/Female'}),
             'doctor_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Doctor Name'}),
             'department': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., General, OPD'}),
-            'admit_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
+            'admit_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }
 
-        def __init__(self, *args, **kwargs):
-            super(PatientForm, self).__init__(*args, **kwargs)
-            self.fields['discharge_time'].required = False
+class PatientEditForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ['Patient_name', 'doctor_name', 'department', 'gender', 'admit_date', 'discharge_date', 'status'] 
 
+        widgets = {
+            'Patient_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Patient Full Name'}),
+            'gender': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., Male/Female'}),
+            'doctor_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Doctor Name'}),
+            'department': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., General, OPD'}),
+            'admit_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'discharge_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'status': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(PatientEditForm, self).__init__(*args, **kwargs)
+        # Kyunki discharge_date null ho sakti hai, isliye required=False zaroori hai
+        self.fields['discharge_date'].required = False
 
 class AdduserForm(UserCreationForm):
     class Meta:
