@@ -10,7 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import environ
+import os
 from pathlib import Path
+
+env = environ.Env(
+    DEBUG=(bool, True)
+)
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,8 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-16iuvqa0=7_r(3@bpi)9v=u1eddgc=nv6f#1@cb=2z0yvp$hu3'
+SECRET_KEY = env('SECRET_KEY', default='local-fallback-key-12345')
+DEBUG = env('DEBUG')
 
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost'])
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -82,15 +93,8 @@ WSGI_APPLICATION = 'Hopital.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    		'default': {
-        	    'ENGINE': 'django.db.backends.mysql',
-        	    'NAME': 'Hospital',   #name of your database
-        	    'USER': 'root',
-        	    'PASSWORD': 'root',
-        	    'HOST': 'localhost',
-        	    'PORT': '3306'
-    		  }
-		}
+    'default': env.db('DATABASE_URL', default='mysql://root:root@127.0.0.1:3306/Hospital')
+}
 
 
 # Password validation
@@ -131,9 +135,12 @@ DATETIME_IMPUT_FORMATES = [
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    BASE_DIR / "home/static", 
+    os.path.join(BASE_DIR, 'home', 'static'),
 ]
+
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/"media"
