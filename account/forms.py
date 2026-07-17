@@ -3,6 +3,7 @@ from .models import Patient
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.models import User
 from doctors.models import Doctors
+from about.models import Story, hopitalStats
 
 class PatientRegistrationForm(forms.ModelForm):
     class Meta:
@@ -91,3 +92,10 @@ class EditdoctorsForm(forms.ModelForm):
             'added_by',
         ]
 
+class EditStory(forms.ModelForm):
+    class Meta:
+        model = Story
+        fields = [
+            'story_title',
+            'story_discription',
+        ]

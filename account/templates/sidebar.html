@@ -30,6 +30,12 @@
                 Doctors
             </a>
         </div>
+
+        <div class="list-group list-group-flush">
+            <a href="{% url 'story' %}" class="list-group-item border-0 font-weight-bold {% if request.resolver_match.url_name == 'story' %} bg-warning text-white {% else %} text-dark {% endif %}">
+                Story
+            </a>
+        </div>
        
         
         <!-- Logout Link -->

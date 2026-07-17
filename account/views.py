@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Patient
-from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm
+from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from doctors.models import Doctors
+from about.models import Story
 
 # Login / Logout Views
 def loginview(request):
@@ -122,6 +123,7 @@ def delete_user(request, pk):
     user.delete()
     return redirect('users')
 
+# Views for doctors
 @login_required(login_url='login')
 def doctorsall(request):
     all_doctor = Doctors.objects.all()
@@ -129,6 +131,7 @@ def doctorsall(request):
         'all_doctor': all_doctor,
     }
     return render(request,'doctordash.html',data)
+
 @login_required(login_url='login')
 def add_doctors(request):
     if request.method == 'POST':
@@ -139,6 +142,7 @@ def add_doctors(request):
     else:    
         form = AdddoctorsForm()
     return render(request,'add_doctors.html',{'form': form})
+
 @login_required(login_url='login')
 def edit_doctors(request,pk):
     doctor = get_object_or_404(Doctors,pk=pk)
@@ -157,3 +161,21 @@ def delete_doctors(request,pk):
     doctor.delete()
     return redirect ('doctorsall')
 
+
+# views for Story
+@login_required(login_url='login')
+def story(request):
+    story = Story.objects.all()
+    return render(request,'story.html',{'story':story})
+
+@login_required(login_url='login')
+def edit_story(request,pk):
+    story = get_object_or_404(Story,pk=pk)
+    if request.method == 'POST':
+        form = EditStory(request.POST, instance=story)
+        if form.is_valid():
+            form.save()
+            return redirect ('story')
+    else:
+        form = EditStory (instance=story)
+    return render(request,'edit_story.html',{'form': form})
