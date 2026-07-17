@@ -36,7 +36,7 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost'])
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['nursing-1-1nfn.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
