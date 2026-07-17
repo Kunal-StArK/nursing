@@ -28,4 +28,8 @@ urlpatterns = [
     path('story/',views.story, name='story'),
     path('story/edit/<int:pk>',views.edit_story,name='edit_story'),
 
+    #stats
+    path('stats/',views.stats, name='stats'),
+    path('stats/edit/<int:pk>',views.edit_stats,name='edit_stats'),
+
 ]

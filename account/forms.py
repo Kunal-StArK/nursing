@@ -99,3 +99,14 @@ class EditStory(forms.ModelForm):
             'story_title',
             'story_discription',
         ]
+
+
+class EditStats(forms.ModelForm):
+    class Meta:
+        model = hopitalStats
+        fields = [
+            'year_of_service',
+            'expert_doctors',
+            'patients_treated',
+            'departments',
+        ]

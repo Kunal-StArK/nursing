@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Patient
-from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory
+from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory,EditStats
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from doctors.models import Doctors
-from about.models import Story
+from about.models import Story,hopitalStats
 
 # Login / Logout Views
 def loginview(request):
@@ -179,3 +179,23 @@ def edit_story(request,pk):
     else:
         form = EditStory (instance=story)
     return render(request,'edit_story.html',{'form': form})
+
+
+
+# views for stats
+@login_required(login_url='login')
+def stats(request):
+    stats = hopitalStats.objects.all()
+    return render(request,'stats.html',{'stats':stats})
+    
+@login_required(login_url='login')    
+def edit_stats(request,pk):
+    stats = get_object_or_404(hopitalStats,pk=pk)
+    if request.method == 'POST':
+        form = EditStats (request.POST, instance=stats)
+        if form.is_valid():
+            form.save()
+            return redirect('stats')
+    else:
+        form = EditStats(instance=stats)
+    return render (request,'edit_stats.html',{'form':form})
