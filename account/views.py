@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Patient
-from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory,EditStats
+from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory,Addstory,EditStats,Addstats
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
@@ -168,6 +168,16 @@ def story(request):
     story = Story.objects.all()
     return render(request,'story.html',{'story':story})
 
+def add_story(request):
+    if request.method == 'POST':
+        form = Addstory(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('story')
+    else:
+        form = Addstory ()
+    return render (request,'add_story.html',{'form': form})
+
 @login_required(login_url='login')
 def edit_story(request,pk):
     story = get_object_or_404(Story,pk=pk)
@@ -187,6 +197,16 @@ def edit_story(request,pk):
 def stats(request):
     stats = hopitalStats.objects.all()
     return render(request,'stats.html',{'stats':stats})
+
+def add_stats(request):
+    if request.method == 'POST':
+        form = Addstats(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('stats')
+    else:
+        form = Addstats ()
+    return render(request,'add_stats.html',{'form':form})
     
 @login_required(login_url='login')    
 def edit_stats(request,pk):

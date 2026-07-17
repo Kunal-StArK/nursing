@@ -92,6 +92,16 @@ class EditdoctorsForm(forms.ModelForm):
             'added_by',
         ]
 
+
+class Addstory(forms.ModelForm):
+    class Meta:
+        model = Story
+        fields = [
+            'story_title',
+            'story_discription',
+        ]
+
+
 class EditStory(forms.ModelForm):
     class Meta:
         model = Story
@@ -100,6 +110,16 @@ class EditStory(forms.ModelForm):
             'story_discription',
         ]
 
+
+class Addstats(forms.ModelForm):
+    class Meta:
+        model = hopitalStats
+        fields = [
+            'year_of_service',
+            'expert_doctors',
+            'patients_treated',
+            'departments',
+        ]
 
 class EditStats(forms.ModelForm):
     class Meta:

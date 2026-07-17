@@ -13,10 +13,10 @@
             {% if perms.auth.views_user %}
 
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h2 mb-0">Story</h1>
-
-
-                
+                <h1 class="h2 mb-0">Story</h1> 
+                 <a href="{% url 'add_story' %}" class="btn btn-warning font-weight-bold text-dark shadow-sm">
+                            Add new Story
+                 </a> 
             </div>
 
             <!-- Dynamic Patients Table -->
@@ -24,6 +24,7 @@
                 <div class="card-header bg-light">
                     <h5 class="mb-0 text-dark">Story</h5>
                 </div>
+               
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">

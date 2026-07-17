@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+    <div class="row">
+            {% include 'sidebar.html' %}
+        <div class="col-md-9">
+
+            {% if perms.auth.views_user %}
+
+                <div class="col-lg-10">
+                    <div class="card shadow border-0">
+                        <div class="card-header bg-dark text-white py-3">
+                            <h4 class="mb-0 h5">New Stats</h4>
+                        </div>
+                        
+                        <div class="card-body p-4">
+                            <form method="POST" action="{% url 'add_stats' %}">
+                                {% csrf_token %}
+                                {{ form | crispy }}
+                                
+                                <div class="d-flex justify-content-between mt-4">
+                                    <a href="{% url 'stats' %}" class="btn btn-secondary shadow-sm">Cancel</a>
+                                    <button type="submit" class="btn btn-warning text-dark font-weight-bold shadow-sm">Save User</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <br>
+                <br>
+                <br>
+                    <h2>You do not have Permission to see this page</h2>
+                {% endif %}
+            </div>
+        
+    </div>
+</div>
+{% endblock %}
