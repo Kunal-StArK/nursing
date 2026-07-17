@@ -12,7 +12,7 @@
                 <div class="col-md-8">
                     <div class="card shadow border-0">
                         <div class="card-header bg-dark text-white">
-                            <h4 class="mb-0">Edit Patient Details</h4>
+                            <h4 class="mb-0">Edit Doctors Details</h4>
                         </div>
                         <div class="card-body p-4">
                             <form method="POST">
@@ -20,7 +20,7 @@
                                 {{ form | crispy }}
 
                                 <div class="d-flex justify-content-between mt-4">
-                                    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+                                    <a href="{% url 'doctorsall' %}" class="btn btn-secondary">Cancel</a>
                                     <button type="submit" class="btn btn-warning text-dark font-weight-bold">Save
                                         Changes</button>
                                 </div>

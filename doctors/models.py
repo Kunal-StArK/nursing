@@ -10,4 +10,3 @@ class Doctors(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     added_by = models.CharField(max_length=100, null=True, blank=True)    #which user added patient
-    created_at = models.DateTimeField(auto_now_add=True)                  #with time

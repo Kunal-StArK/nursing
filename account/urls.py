@@ -17,5 +17,10 @@ urlpatterns = [
     path('users/add/',views.add_user,name='add_user'),
     path('users/edit/<int:pk>',views.edit_user,name='edit_user'),
     path('users/delete/<int:pk>',views.delete_user,name='delete_user'),
+
+    path('doctorsall/',views.doctorsall, name='doctorsall'),
+    path('doctors/add/',views.add_doctors,name='add_doctors'),
+    path('doctors/edit/<int:pk>',views.edit_doctors,name='edit_doctors'),
+    path('doctors/delete/<int:pk>',views.delete_doctors,name='delete_doctors'),
     
 ]

@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Patient
-from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm 
+from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
+from doctors.models import Doctors
 
 # Login / Logout Views
 def loginview(request):
@@ -54,7 +55,7 @@ def add_patient(request):
         form = PatientRegistrationForm(request.POST)
         if form.is_valid():
             patient = form.save(commit=False)
-            patient.added_by = request.user.username if request.user.is_authenticated else "Anonymous"
+            patient.added_by = request.user.username
             patient.save()
             return redirect('dashboard')
     else:
@@ -120,3 +121,39 @@ def delete_user(request, pk):
     user = get_object_or_404(User, pk=pk)
     user.delete()
     return redirect('users')
+
+@login_required(login_url='login')
+def doctorsall(request):
+    all_doctor = Doctors.objects.all()
+    data ={
+        'all_doctor': all_doctor,
+    }
+    return render(request,'doctordash.html',data)
+@login_required(login_url='login')
+def add_doctors(request):
+    if request.method == 'POST':
+        form = AdddoctorsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect ('doctorsall')
+    else:    
+        form = AdddoctorsForm()
+    return render(request,'add_doctors.html',{'form': form})
+@login_required(login_url='login')
+def edit_doctors(request,pk):
+    doctor = get_object_or_404(Doctors,pk=pk)
+    if request.method == 'POST':
+        form = EditdoctorsForm(request.POST, request.FILES, instance=doctor)
+        if form.is_valid():
+            form.save()
+            return redirect('doctorsall')
+    else:
+        form = EditdoctorsForm(instance=doctor)        
+    return render(request,'edit_doctors.html',{'form': form})
+
+@login_required(login_url='login')
+def delete_doctors(request,pk):
+    doctor = get_object_or_404(Doctors,pk=pk)
+    doctor.delete()
+    return redirect ('doctorsall')
+

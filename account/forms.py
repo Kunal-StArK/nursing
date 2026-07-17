@@ -2,6 +2,7 @@ from django import forms
 from .models import Patient
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.models import User
+from doctors.models import Doctors
 
 class PatientRegistrationForm(forms.ModelForm):
     class Meta:
@@ -68,5 +69,25 @@ class EdituserForm(forms.ModelForm):
         ]
 
 
+class AdddoctorsForm(forms.ModelForm):
+    class Meta:
+        model = Doctors
+        fields = [
+            'doctor_name',
+            'doctor_specialist',
+            'doctor_experience',
+            'doctor_img',
+            'added_by',
+        ]
 
+class EditdoctorsForm(forms.ModelForm):
+    class Meta:
+        model = Doctors
+        fields = [
+            'doctor_name',
+            'doctor_specialist',
+            'doctor_experience',
+            'doctor_img',
+            'added_by',
+        ]
 
