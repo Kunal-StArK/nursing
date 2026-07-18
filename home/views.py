@@ -21,3 +21,7 @@ def contactview(request):
 
 def galleryview(request):
     return render (request, 'gallery.html')
+
+def book_appointment(request):
+    return render(request, 'book_appointment.html')
+

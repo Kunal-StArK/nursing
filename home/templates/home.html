@@ -11,7 +11,7 @@
     <p style="font-size:1.15rem;max-width:600px;">Dedicated to your health &amp; happiness — we provide world-class healthcare with experienced doctors, advanced medical technology, and compassionate patient care.</p>
     <div class="pulse"><svg viewBox="0 0 140 22"><path d="M0 11 H40 L48 2 L56 20 L64 4 L70 11 H140"/></svg><span class="pulse-label">Care that listens, every heartbeat</span></div>
     <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;">
-      <a href="contact.html" class="btn btn-primary">Book Appointment</a>
+      <a href="{% url 'book_appointment' %}" class="btn btn-primary">Book Appointment</a>
       <a href="tel:+919876543210" class="btn btn-coral">📞 Call Now</a>
     </div>
   </div>
@@ -116,7 +116,7 @@
         <p>Book an appointment online or call us — our team is available 24/7 for emergencies.</p>
       </div>
       <div class="cta-actions">
-        <a href="contact.html" class="btn btn-outline">Book Appointment</a>
+        <a href="{% url 'book_appointment' %}" class="btn btn-outline">Book Appointment</a>
         <a href="tel:+919876543210" class="btn btn-coral">📞 +91 9876543210</a>
       </div>
     </div>
