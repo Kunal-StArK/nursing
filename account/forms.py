@@ -1,7 +1,10 @@
 from django import forms
 from .models import Patient
 from django.contrib.auth.forms import UserCreationForm 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
 from doctors.models import Doctors
 from about.models import Story, hopitalStats
 
@@ -47,6 +50,7 @@ class AdduserForm(UserCreationForm):
             'last_name', 
             'username', 
             'email',
+            'phone_number',
             'is_active', 
             'is_staff', 
             'is_superuser', 
@@ -62,12 +66,14 @@ class EdituserForm(forms.ModelForm):
             'last_name', 
             'username', 
             'email',
+            'phone_number',
             'is_active', 
             'is_staff', 
             'is_superuser', 
             'groups', 
             'user_permissions'
         ]
+
 
 
 class AdddoctorsForm(forms.ModelForm):
