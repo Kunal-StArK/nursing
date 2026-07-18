@@ -22,7 +22,8 @@ def loginview(request):
             if user is not None:
                 auth.login(request, user)
                 return redirect('dashboard')
-    form = AuthenticationForm()
+    else:
+        form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
 @login_required(login_url='login')
@@ -105,7 +106,8 @@ def add_user(request):
         if form.is_valid():
             form.save()
             return redirect('users')
-    form = AdduserForm()
+    else:
+        form = AdduserForm()
     return render(request, 'add_user.html', {'form': form})
 
 @login_required(login_url='login')
@@ -116,7 +118,8 @@ def edit_user(request, pk):
         if form.is_valid():
             form.save()
             return redirect('users')
-    form = EdituserForm(instance=user)
+    else:
+        form = EdituserForm(instance=user)
     return render(request, 'edit_user.html', {'form': form})
 
 @login_required(login_url='login')
