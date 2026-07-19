@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from about.models import hopitalStats
 from .models import AppointmentModel
+from account.models import Patient
 from django.contrib import messages
 
 # Create your views here.
@@ -35,9 +36,21 @@ def book_appointment(request):
         department = request.POST.get('department')
         notes = request.POST.get('notes')
 
-        AppointmentModel.objects.create( name=name,phone=phone,email=email,date=date,department=department,notes=notes)
+        Patient.objects.create(
+            Patient_name=name,
+            phone=phone,
+            email=email,
+            gender=gender if gender else 'Other',
+            admit_date=date,
+            department=department,
+            notes=notes,
+            status='Pending',
+            added_by='Online Booking',
+            doctor_name='Not Assigned'
+        )
 
         messages.success(request, 'Your appointment request has been sent! We will call you soon.')
         return redirect('book_appointment')
     return render(request, 'book_appointment.html')
+
 
