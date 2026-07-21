@@ -1,13 +1,10 @@
-<!-- ===========================================================
-     SUGANTI NURSING HOME — FOOTER
-     Paste this block right before </body> on every page.
-=========================================================== -->
+
 <footer class="site-footer">
   <div class="footer-top">
     <div class="container footer-grid">
 
       <div class="footer-col footer-brand">
-        <a href="index.html" class="brand">
+        <a href="{% url 'home' %}" class="brand">
           <span class="mark">S</span>
           <span>
             <span class="name">Suganti Nursing Home</span><br>
@@ -38,12 +35,12 @@
       <div class="footer-col">
         <h4>Departments</h4>
         <ul>
-          <li><a href="departments.html">Cardiology</a></li>
-          <li><a href="departments.html">Gynaecology</a></li>
-          <li><a href="departments.html">Pediatrics</a></li>
-          <li><a href="departments.html">Orthopaedics</a></li>
-          <li><a href="departments.html">General Surgery</a></li>
-          <li><a href="departments.html">Emergency Care</a></li>
+          <li><a href="{% url 'departments' %}">Cardiology</a></li>
+          <li><a href="{% url 'departments' %}">Gynaecology</a></li>
+          <li><a href="{% url 'departments' %}">Pediatrics</a></li>
+          <li><a href="{% url 'departments' %}">Orthopaedics</a></li>
+          <li><a href="{% url 'departments' %}">General Surgery</a></li>
+          <li><a href="{% url 'departments' %}">Emergency Care</a></li>
         </ul>
       </div>
 
@@ -67,13 +64,11 @@
     <div class="footer-legal">
       <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
-      <a href="contact.html">Contact</a>
+      <a href="{% url 'contacts' %}">Contact</a>
     </div>
   </div>
 </footer>
-<!-- ===========================================================
-     END FOOTER
-=========================================================== -->
+
 
 <script src="/static/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

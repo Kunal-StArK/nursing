@@ -4,12 +4,13 @@ from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientE
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model 
 User = get_user_model()
-
 from django.core.paginator import Paginator
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from doctors.models import Doctors
 from about.models import Story,hopitalStats
+
+
 
 # Login / Logout Views
 def loginview(request):

@@ -41,7 +41,7 @@ def book_appointment(request):
             phone=phone,
             email=email,
             gender=gender if gender else 'Other',
-            admit_date=date,
+            booking_date=date,
             department=department,
             notes=notes,
             status='Pending',

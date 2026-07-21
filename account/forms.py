@@ -2,8 +2,9 @@ from django import forms
 from .models import Patient
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth import get_user_model
-
 User = get_user_model()
+
+
 
 from doctors.models import Doctors
 from about.models import Story, hopitalStats
@@ -11,7 +12,7 @@ from about.models import Story, hopitalStats
 class PatientRegistrationForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['Patient_name', 'doctor_name', 'phone', 'email', 'department', 'gender', 'admit_date', 'status', 'notes'] 
+        fields = ['Patient_name', 'doctor_name', 'phone', 'email', 'department', 'gender', 'booking_date', 'admit_date', 'status', 'notes'] 
 
         widgets = {
             'Patient_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Patient Full Name'}),
@@ -20,15 +21,22 @@ class PatientRegistrationForm(forms.ModelForm):
             'gender': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., Male/Female'}),
             'doctor_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Doctor Name'}),
             'department': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., General, OPD'}),
+            'booking_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'admit_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
             'notes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Symptom or comments'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super(PatientRegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['admit_date'].required = False
+        self.fields['booking_date'].required = False
+        self.fields['notes'].required = False
+
 class PatientEditForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['Patient_name', 'doctor_name', 'phone', 'email', 'department', 'gender', 'admit_date', 'discharge_date', 'status', 'notes'] 
+        fields = ['Patient_name', 'doctor_name', 'phone', 'email', 'department', 'gender', 'booking_date', 'admit_date', 'discharge_date', 'status', 'notes'] 
 
         widgets = {
             'Patient_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Patient Full Name'}),
@@ -37,6 +45,7 @@ class PatientEditForm(forms.ModelForm):
             'gender': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., Male/Female'}),
             'doctor_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Doctor Name'}),
             'department': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., General, OPD'}),
+            'booking_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'admit_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'discharge_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
@@ -46,8 +55,11 @@ class PatientEditForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PatientEditForm, self).__init__(*args, **kwargs)
         # Kyunki discharge_date null ho sakti hai, isliye required=False zaroori hai
+        self.fields['admit_date'].required = False
+        self.fields['booking_date'].required = False
         self.fields['discharge_date'].required = False
         self.fields['notes'].required = False
+
 
 
 class AdduserForm(UserCreationForm):

@@ -26,11 +26,12 @@ class Patient(models.Model):
 
     department = models.CharField(max_length=100)
     gender = models.CharField(max_length=10)
-    admit_date = models.DateField()
+    admit_date = models.DateField(null=True, blank=True)
+    booking_date = models.DateField(null=True, blank=True)
     discharge_date = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
     added_by = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        return self.Patient_name
+        return self.Patient_name

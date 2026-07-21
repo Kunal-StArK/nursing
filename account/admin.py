@@ -11,9 +11,12 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = UserAdmin.add_fieldsets + (
         (None, {'fields': ('phone_number', 'address')}),
     )
+admin.site.register(CustomUser, CustomUserAdmin)
+
+
 
 class PatientAdmin(admin.ModelAdmin):
     list_display=('Patient_name','doctor_name')
 
 admin.site.register(Patient,PatientAdmin)    
-admin.site.register(CustomUser, CustomUserAdmin)
+
