@@ -52,21 +52,25 @@
     <div class="header-actions">
       <a href="{% url 'book_appointment' %}" class="btn btn-primary">Book Appointment</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
+        <span></span><span></span>
       </button>
     </div>
     <div class="header-actions">
       <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="header-actions">
+      <a href="{% url 'register' %}" class="btn btn-warning">Register</a>
       </button>
     </div>
     {% else %}
-    <span><a href="{% url 'dashboard' %}" class="btn btn-primary">Dashboard</a></span>
-    <div class="header-actions">
+        <span><a href="{% url 'dashboard' %}" class="btn btn-primary">Dashboard</a></span>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span>
+      </button>  
+     <div class="header-actions">
       <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
       </button>
     </div>
     {% endif %}

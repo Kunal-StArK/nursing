@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Patient
-from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory,Addstory,EditStats,Addstats
+from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory,Addstory,EditStats,Addstats,RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model 
 User = get_user_model()
@@ -13,6 +13,16 @@ from about.models import Story,hopitalStats
 
 
 # Login / Logout Views
+def registerview(request):
+    if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('login')
+    else:
+            form =  RegisterForm()
+    return render(request ,'accounts/register.html',{'form': form})
+
 def loginview(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
