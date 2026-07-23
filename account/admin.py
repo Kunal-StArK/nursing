@@ -11,6 +11,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = UserAdmin.add_fieldsets + (
         (None, {'fields': ('phone_number', 'address')}),
     )
+    readonly_fields = ('last_login','date_joined') 
 admin.site.register(CustomUser, CustomUserAdmin)
 
 

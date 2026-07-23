@@ -29,3 +29,5 @@ class AppointmentModel(models.Model):
     department = models.CharField(max_length=100, choices=DEPARTMENT_CHOICES)
     notes = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+

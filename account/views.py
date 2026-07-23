@@ -9,6 +9,7 @@ from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from doctors.models import Doctors
 from about.models import Story,hopitalStats
+from contactUs.models import contact
 
 
 
@@ -35,7 +36,7 @@ def loginview(request):
                 return redirect('dashboard')
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'accounts/login.html', {'form': form})
 
 @login_required(login_url='login')
 def logout(request):
@@ -237,3 +238,9 @@ def edit_stats(request,pk):
     else:
         form = EditStats(instance=stats)
     return render (request,'edit_stats.html',{'form':form})
+
+
+#contact US
+def contactUs(request):
+    contacts = contact.objects.all().order_by('-id')
+    return render(request,'contactUs.html',{'contacts':contacts})

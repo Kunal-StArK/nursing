@@ -63,19 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---- Contact form (expects #contactForm) ---- */
-  var contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var note = document.getElementById('formNote');
-      if (note) {
-        note.textContent = 'Thank you. Your message has been received — our team will contact you shortly.';
-        note.style.color = '#1F8FC4';
-      }
-      contactForm.reset();
-    });
-  }
+
 
   /* ---- Appointment form (expects #appointmentForm) ---- */
   var apptForm = document.getElementById('appointmentForm');

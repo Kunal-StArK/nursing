@@ -35,4 +35,6 @@ urlpatterns = [
     path('stats/add/',views.add_stats,name='add_stats'),
     path('stats/edit/<int:pk>/',views.edit_stats,name='edit_stats'),
 
+    # Contact
+    path('contact-Us/',views.contactUs, name='contactUs')
 ]

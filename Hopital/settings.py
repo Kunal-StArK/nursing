@@ -42,7 +42,7 @@ ALLOWED_HOSTS = ['nursing-1-1nfn.onrender.com', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    #'jazzmin',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'account',
     'crispy_forms',
     'crispy_bootstrap4',
+    'contactUs',
     
 ]
 
@@ -159,4 +160,4 @@ MEDIA_ROOT = BASE_DIR/"media"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-AUTH_USER_MODEL = 'account.CustomUser'
+AUTH_USER_MODEL = 'account.CustomUser'

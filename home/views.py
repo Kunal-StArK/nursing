@@ -19,9 +19,6 @@ def servicesview(request):
 def departmentsview(request):
     return render (request, 'departments.html')
 
-def contactview(request):
-    return render (request, 'contact.html')
-
 def galleryview(request):
     return render (request, 'gallery.html')
 

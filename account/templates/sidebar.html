@@ -41,6 +41,11 @@
             <a href="{% url 'stats' %}" class="list-group-item border-0 font-weight-bold {% if request.resolver_match.url_name == 'stats' %} bg-warning text-white {% else %} text-dark {% endif %}">
                 Stats
             </a>
+        </div>
+        <div class="list-group list-group-flush">
+            <a href="{% url 'contactUs' %}" class="list-group-item border-0 font-weight-bold {% if request.resolver_match.url_name == 'contactUs' %} bg-warning text-white {% else %} text-dark {% endif %}">
+                Contact US
+            </a>
         </div>     
         <!-- Logout Link -->
         <div class="list-group list-group-flush">

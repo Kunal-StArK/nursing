@@ -24,7 +24,7 @@
             <!-- Dynamic Patients Table -->
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-light">
-                    <h5 class="mb-0 text-dark">All Registered Patients</h5>
+                    <h5 class="mb-0 text-dark">All Registered User</h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
@@ -34,6 +34,7 @@
                                 <th>Full Name</th>
                                 <th>Username</th>
                                 <th>Email</th>
+                                <th>Phone</th>
                                 <th>Active</th>
                                 <th>Staff</th>
                                 <th>Superuser</th>
@@ -47,6 +48,7 @@
                                 <td>{{ user.first_name }} {{ user.last_name }}</td>
                                 <td>{{ user.username }}</td>
                                 <td>{{ user.email }}</td>
+                                <td>{{ user.phone_number }}</td>
                                 <td>{% if user.is_active %}<i class="fa-solid fa-check text-success"></i>{% else %}<i
                                         class="fa-solid fa-xmark text-danger"></i>{% endif %}</td>
                                 <td>{% if user.is_staff %}<i class="fa-solid fa-check text-success"></i>{% else %}<i

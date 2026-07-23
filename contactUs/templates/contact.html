@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+    {% block content %}
+
+<!-- HEADER GOES HERE — paste header.html content -->
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">Home / <span>Contact</span></div>
+    <h1>Get In Touch</h1>
+    <p>Have a question or want to book an appointment? Reach out — our team responds quickly.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <div>
+      <span class="eyebrow on-light">Contact Details</span>
+      <h2>We're Here to Help</h2>
+      <ul class="info-list">
+        <li><span class="ic">📍</span><div><h4>Address</h4><p>123 MG Road, Near City Centre, Your City – 110001</p></div></li>
+        <li><span class="ic">📞</span><div><h4>Phone</h4><p>+91 9876543210</p></div></li>
+        <li><span class="ic">✉️</span><div><h4>Email</h4><p>info@sugantinursinghome.com</p></div></li>
+        <li><span class="ic">⏰</span><div><h4>Working Hours</h4><p>Open 24 Hours — All 7 Days (Emergency)</p></div></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:18px;">Send Us a Message</h3>
+
+      <!-- Django Messages Alert -->
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show mb-4" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <form id="contactForm" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-field"><label for="cName">Full Name</label><input type="text" id="cName" name="full_name"required></div>
+          <div class="form-field"><label for="cPhone">Phone Number</label><input type="tel" id="cPhone" name="phone" required></div>
+        </div>
+        <div class="form-field"><label for="cEmail">Email Address</label><input type="email" id="cEmail" name="email" required></div>
+        <div class="form-field"><label for="cMsg">Message</label><textarea id="cMsg" name="message" required ></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Message</button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow on-light">Find Us</span>
+      <h2>Our Location</h2>
+    </div>
+    <div class="map-box">
+      <iframe src="https://www.google.com/maps?q=hospital&output=embed" loading="lazy" title="Suganti Nursing Home Location"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER GOES HERE — paste footer.html content -->
+
+{% endblock %}
