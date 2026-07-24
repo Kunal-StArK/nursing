@@ -1,6 +1,5 @@
 from django.shortcuts import render,redirect
 from about.models import hopitalStats
-from .models import AppointmentModel
 from account.models import Patient
 from django.contrib import messages
 

@@ -34,23 +34,4 @@ class Patient(models.Model):
     added_by = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        return self.Patient_name
-
-
-class RegisterModel(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    user_name = models.CharField(max_length=50 ,unique=True)
-    email = models.EmailField(max_length=50, unique=True)
-    phone = models.CharField(max_length=15)
-    password = models.CharField(max_length=128)
-
-    #required
-    date_joined = models.DateField(auto_now_add=True)
-    last_login = models.DateField(auto_now_add=True)
-    is_admin  = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['user_name','first_name','last_name']
+        return self.Patient_name

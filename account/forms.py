@@ -1,5 +1,5 @@
 from django import forms
-from .models import Patient , RegisterModel
+from .models import Patient
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -162,12 +162,12 @@ class RegisterForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder': 'Confirm password'}))
 
     class Meta:
-        model = RegisterModel
-        fields = ['first_name', 'last_name', 'phone', 'email', 'password']
+        model = User
+        fields = ['first_name', 'last_name', 'phone_number', 'email', 'password']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
-            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
         }
 
@@ -181,37 +181,23 @@ class RegisterForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True):
-        register_instance = super().save(commit=False)
+        user = super().save(commit=False)
         
         # Auto-generate username from email (take portion before '@')
-        email = register_instance.email
+        email = user.email
         base_username = email.split('@')[0]
-        
-        # Create the standard CustomUser record so they can log in
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
         
         # Ensure uniqueness of the generated username
         username = base_username
         counter = 1
-        while User.objects.filter(username=username).exists() or RegisterModel.objects.filter(user_name=username).exists():
+        while User.objects.filter(username=username).exists():
             username = f"{base_username}{counter}"
             counter += 1
             
-        register_instance.user_name = username
+        user.username = username
+        user.set_password(self.cleaned_data['password'])
+        user.is_active = True
         
-        if not User.objects.filter(email=register_instance.email).exists():
-            user = User.objects.create_user(
-                username=username,
-                email=register_instance.email,
-                first_name=register_instance.first_name,
-                last_name=register_instance.last_name,
-                phone_number=register_instance.phone,
-                password=self.cleaned_data['password']
-            )
-            user.is_active = True
-            user.save()
-            
         if commit:
-            register_instance.save()
-        return register_instance
+            user.save()
+        return user
