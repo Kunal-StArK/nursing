@@ -6,6 +6,7 @@
         {% include 'sidebar.html' %}
 
         <div class="col-md-9 col-lg-10">
+            {% if perms.auth.views_user %}
 
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h2 mb-0">All Contact Form</h1>
@@ -45,7 +46,12 @@
                     </table>
                 </div>
             </div>
-            
+            {% else %}
+                <br>
+                <br>
+                <br>
+                    <h2>You do not have Permission to see this page</h2>
+                {% endif %}
         </div>
     </div>
 </div>

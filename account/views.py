@@ -101,7 +101,7 @@ def delete_patient(request, pk):
 @login_required(login_url='login')
 def users(request):
     all_users = User.objects.all()
-    paginator = Paginator(all_users, 3)  # 3 per page
+    paginator = Paginator(all_users, 5)  # 5 per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
@@ -241,6 +241,7 @@ def edit_stats(request,pk):
 
 
 #contact US
+@login_required(login_url='login')  
 def contactUs(request):
     contacts = contact.objects.all().order_by('-id')
     return render(request,'contactUs.html',{'contacts':contacts})
