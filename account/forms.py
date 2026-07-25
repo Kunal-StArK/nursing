@@ -124,7 +124,7 @@ class Addstory(forms.ModelForm):
         model = Story
         fields = [
             'story_title',
-            'story_discription',
+            'story_description',
         ]
 
 
@@ -133,7 +133,7 @@ class EditStory(forms.ModelForm):
         model = Story
         fields = [
             'story_title',
-            'story_discription',
+            'story_description',
         ]
 
 
@@ -196,7 +196,10 @@ class RegisterForm(forms.ModelForm):
             
         user.username = username
         user.set_password(self.cleaned_data['password'])
-        user.is_active = True
+        
+        user.is_active = False
+        user.is_staff = False
+        user.is_superuser = False
         
         if commit:
             user.save()

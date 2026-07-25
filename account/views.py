@@ -6,25 +6,64 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model 
 User = get_user_model()
 from django.core.paginator import Paginator
-from django.contrib import auth ,messages
+from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from doctors.models import Doctors
 from about.models import Story,hopitalStats
 from contactUs.models import contact
 
+#verification email
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import EmailMessage
+from django.contrib import messages
 
 
 # Login / Logout Views
 def registerview(request):
     if request.method == 'POST':
-            form = RegisterForm(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Registration Successful.")
-                return redirect('register')
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+
+            # User Activation
+            current_site = get_current_site(request)
+            mail_subject = 'Please activate your account'
+            email_body = render_to_string('accounts/account_varification_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': default_token_generator.make_token(user)
+            })
+            to_email = user.email
+            send_email = EmailMessage(mail_subject, email_body, to=[to_email])
+            send_email.send()
+
+            #messages.success(request, "Registration Successful. we have send a mail to your email adderss {user.email} Please verify it.")
+            return redirect('/account/login/?command=verification&email='+user.email)
     else:
-            form =  RegisterForm()
-    return render(request ,'accounts/register.html',{'form': form})
+        form = RegisterForm()
+    return render(request, 'accounts/register.html', {'form': form})
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.success(request, 'Your account has been activated successfully! You can now log in.')
+        return redirect('login')
+    else:
+        messages.error(request, 'The activation link is invalid or has expired.')
+        return redirect('register')
+    
 
 def loginview(request):
     if request.method == 'POST':

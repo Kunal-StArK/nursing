@@ -4,7 +4,7 @@ from .models import hopitalStats
 # Register your models here.
 
 class StoryAdmin(admin.ModelAdmin):
-    list_display = ('story_title','story_discription')
+    list_display = ('story_title','story_description')
     def has_add_permission(self, request):
         count = Story.objects.all().count()
         if count == 0 :

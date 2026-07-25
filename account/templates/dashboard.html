@@ -97,13 +97,11 @@
                                     <span class="badge bg-danger text-white">{{ patient.status }}</span>
                                     {% endif %}
                                     <br>
-                                    <small class="text-muted d-block mt-1">{{ patient.created_at|date:"d-m-Y H:i"
-                                        }}</small>
+                                    <small class="text-muted d-block mt-1">{{ patient.created_at|date:"d-m-Y H:i"}}</small>
                                 </td>
 
                                 <td>
-                                    <span class="text-muted font-weight-bold">{{
-                                        patient.added_by|default:"System"}}</span>
+                                    <span class="text-muted font-weight-bold">{{patient.added_by|default:"System"}}</span>
                                 </td>
                                 <td class="text-center">
                                     <!-- Edit Button -->
