@@ -1,0 +1,22 @@
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show custom-alert" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+
+  <script>
+    setTimeout(function() {
+      var alerts = document.querySelectorAll('.custom-alert');
+      alerts.forEach(function(alert) {
+        alert.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        alert.style.opacity = '0';
+        alert.style.transform = 'translateY(-10px)';
+        setTimeout(function() {
+          alert.remove();
+        }, 800);
+      });
+    }, 5000);
+  </script>
+{% endif %}

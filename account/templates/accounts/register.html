@@ -1,26 +1,24 @@
 {% extends "base.html" %}
     {% block content %}
     {% load crispy_forms_tags %}
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">     
-        <div class="col-md-9">
-                <div class="col-lg-10">
-                    <div class="card shadow border-0">
-                        <div class="card-header bg-dark text-white py-3">
-                            <h4 class="mb-0 h5 ">Registration</h4>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="col-11 col-sm-9 col-md-9 col-lg-8">
+            <div class="card shadow border-0">
+                {% include "alerts.html" %}
+                <div class="card-header bg-dark text-white py-3">
+                    <h4 class="mb-0 h5 text-center">Registration</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        {{ form | crispy }}                               
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-warning text-dark font-weight-bold shadow-sm">Register</button>
+                            <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
                         </div>
-                        <div class="card-body p-4">
-                            <form method="POST" action="{% url 'register' %}">
-                                {% csrf_token %}
-                                {{ form | crispy }}                               
-                                <div class="d-flex justify-content-between mt-4">
-                                    <a href="{% url 'users' %}" class="btn btn-secondary shadow-sm">Cancel</a>
-                                    <button type="submit" class="btn btn-warning text-dark font-weight-bold shadow-sm">confirm</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
     </div>
-</div>
 {% endblock %}

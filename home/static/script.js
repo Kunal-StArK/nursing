@@ -79,4 +79,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ---- Auto-dismiss custom-alerts after 5 seconds ---- */
+  setTimeout(function() {
+    var alerts = document.querySelectorAll('.custom-alert');
+    alerts.forEach(function(alert) {
+      alert.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      alert.style.opacity = '0';
+      alert.style.transform = 'translateY(-10px)';
+      setTimeout(function() {
+        alert.remove();
+      }, 800);
+    });
+  }, 5000);
+
 });
+

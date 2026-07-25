@@ -14,6 +14,7 @@
 
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h2 mb-0">Dashboard Overview</h1>
+                {% include "alerts.html" %}
 
                 <!--Super user login -->
                 {% if request.user.is_superuser %}
@@ -26,11 +27,7 @@
                 <a href="{% url 'add_patient' %}" class="btn btn-warning font-weight-bold text-dark shadow-sm">
                     +Add Patient
                 </a>
-            </div>
-
-
-
-            <!-- Dynamic Stats Cards -->
+            </div><!-- Dynamic Stats Cards -->
             <div class="row mb-4">
                 <div class="col-md-4 mb-3">
                     <div class="card text-white bg-primary shadow-sm border-0">
@@ -100,11 +97,13 @@
                                     <span class="badge bg-danger text-white">{{ patient.status }}</span>
                                     {% endif %}
                                     <br>
-                                    <small class="text-muted d-block mt-1">{{ patient.created_at|date:"d-m-Y H:i" }}</small>
+                                    <small class="text-muted d-block mt-1">{{ patient.created_at|date:"d-m-Y H:i"
+                                        }}</small>
                                 </td>
 
                                 <td>
-                                    <span class="text-muted font-weight-bold">{{ patient.added_by|default:"System"}}</span>
+                                    <span class="text-muted font-weight-bold">{{
+                                        patient.added_by|default:"System"}}</span>
                                 </td>
                                 <td class="text-center">
                                     <!-- Edit Button -->
@@ -160,11 +159,11 @@
             </nav>
         </div>
         {% else %}
-            <br>
-            <br>
-            <br>
-            <h2>You do not have Permission to see this page</h2>
-            {% endif %}
+        <br>
+        <br>
+        <br>
+        <h2>You do not have Permission to see this page</h2>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

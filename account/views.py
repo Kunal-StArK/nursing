@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Patient
 from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory,Addstory,EditStats,Addstats,RegisterForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.auth import get_user_model 
 User = get_user_model()
 from django.core.paginator import Paginator
-from django.contrib import auth
+from django.contrib import auth ,messages
 from django.contrib.auth.forms import AuthenticationForm
 from doctors.models import Doctors
 from about.models import Story,hopitalStats
@@ -19,21 +20,24 @@ def registerview(request):
             form = RegisterForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('login')
+                messages.success(request, "Registration Successful.")
+                return redirect('register')
     else:
             form =  RegisterForm()
     return render(request ,'accounts/register.html',{'form': form})
 
 def loginview(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = auth.authenticate(username=username, password=password)
-            if user is not None:
-                auth.login(request, user)
-                return redirect('dashboard')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request,'You are logged In')
+            return redirect('dashboard')
+        else:
+            messages.error(request, "Invalid email or password.")
+            form = AuthenticationForm(initial={'username': username})
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
@@ -41,7 +45,8 @@ def loginview(request):
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
-    return redirect('home')
+    messages.success(request,'You are logged Out')
+    return redirect('login')
 
 # --- PATIENTS VIEWS ---
 
@@ -101,7 +106,7 @@ def delete_patient(request, pk):
 @login_required(login_url='login')
 def users(request):
     all_users = User.objects.all()
-    paginator = Paginator(all_users, 5)  # 5 per page
+    paginator = Paginator(all_users, 3)  # 3 per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
