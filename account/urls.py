@@ -5,7 +5,10 @@ urlpatterns = [
     path('register/',views.registerview, name='register'),
     path('login/',views.loginview, name='login'),
     path('logout/',views.logout,name='logout'),
+
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+    path('forgotpassword/',views.forgotpassword,name='forgotpassword'),
+    path('resetpassword/<uidb64>/<token>/', views.resetpassword, name='resetpassword'),
 
 
     # Dashboards

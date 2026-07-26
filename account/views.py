@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Patient
-from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory,Addstory,EditStats,Addstats,RegisterForm
+from .forms import AdduserForm , EdituserForm, PatientRegistrationForm, PatientEditForm, AdddoctorsForm , EditdoctorsForm,EditStory,Addstory,EditStats,Addstats,RegisterForm, ForgotPasswordForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model 
 User = get_user_model()
 from django.core.paginator import Paginator
 from django.contrib import auth
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, SetPasswordForm
 from doctors.models import Doctors
 from about.models import Story,hopitalStats
 from contactUs.models import contact
@@ -67,6 +67,63 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, 'The activation link is invalid or has expired.')
         return redirect('register')
+
+def forgotpassword(request):
+    if request.method == 'POST':
+        form = ForgotPasswordForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = User.objects.filter(email=email).first()
+            if user is not None:
+                current_site = get_current_site(request)
+                mail_subject = 'Reset your password'
+                email_body = render_to_string('accounts/reset_password_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user)
+                })
+                to_email = user.email
+                try:
+                    send_email = EmailMessage(mail_subject, email_body, to=[to_email])
+                    send_email.send()
+                    messages.success(request, "Password reset link has been sent to your email.")
+                except Exception as e:
+                    # Print link in terminal for local testing
+                    uid_str = urlsafe_base64_encode(force_bytes(user.pk))
+                    if isinstance(uid_str, bytes):
+                        uid_str = uid_str.decode()
+                    token_str = default_token_generator.make_token(user)
+                    reset_link = f"http://{current_site.domain}/account/resetpassword/{uid_str}/{token_str}/"
+                    print(f"[DEVELOPMENT ONLY] Reset Link: {reset_link}")
+                    messages.warning(request, "Could not send email. (For development, the reset link has been printed to the server terminal console).")
+            else:
+                messages.success(request, "If that email exists in our system, we have sent a password reset link.")
+            return redirect('forgotpassword')
+    else:
+        form = ForgotPasswordForm()
+    return render(request, 'accounts/forgotpassword.html', {'form': form})
+
+def resetpassword(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            form = SetPasswordForm(user, request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Your password has been reset successfully! You can now log in.')
+                return redirect('login')
+        else:
+            form = SetPasswordForm(user)
+        return render(request, 'accounts/resetpassword.html', {'form': form})
+    else:
+        messages.error(request, 'The password reset link is invalid or has expired.')
+        return redirect('forgotpassword')
     
 
 def loginview(request):

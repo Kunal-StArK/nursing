@@ -206,3 +206,7 @@ class RegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}))
