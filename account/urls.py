@@ -30,11 +30,13 @@ urlpatterns = [
     path('story/',views.story, name='story'),
     path('story/add/',views.add_story,name='add_story'),
     path('story/edit/<int:pk>/',views.edit_story,name='edit_story'),
+    path('story/delete/<int:pk>/',views.delete_story,name='delete_story'),
 
     #stats
     path('stats/',views.stats, name='stats'),
     path('stats/add/',views.add_stats,name='add_stats'),
     path('stats/edit/<int:pk>/',views.edit_stats,name='edit_stats'),
+    path('stats/delete/<int:pk>/',views.delete_stats,name='delete_stats'),
 
     # Contact
     path('contact-Us/',views.contactUs, name='contactUs')

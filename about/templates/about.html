@@ -18,7 +18,11 @@
       <p>{{ story.story_description }}</p>
       <div class="pulse"><svg viewBox="0 0 140 22"><path d="M0 11 H40 L48 2 L56 20 L64 4 L70 11 H140"/></svg><span class="pulse-label">Caring since day one</span></div>
     </div>
-    <div class="split-media">🏥</div>
+    <div class="photo">
+          {% if story.img %}
+              <img src="{{ story.img.url }}" class="card-img-top img-fluid" style="height: 400px; object-fit: cover;" alt="d.doctor_name">
+          {% endif %}
+        </div>
   </div>
 </section>
 

@@ -125,6 +125,7 @@ class Addstory(forms.ModelForm):
         fields = [
             'story_title',
             'story_description',
+            'img',
         ]
 
 
@@ -134,6 +135,7 @@ class EditStory(forms.ModelForm):
         fields = [
             'story_title',
             'story_description',
+            'img',
         ]
 
 

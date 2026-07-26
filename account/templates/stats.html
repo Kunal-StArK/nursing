@@ -45,6 +45,10 @@
                                     <a href="{% url 'edit_stats' s.id %}" class="btn btn-sm btn-outline-primary me-2">
                                         Edit
                                     </a>
+                                    <!-- Delete Button -->
+                                    <a href="{% url 'delete_stats' s.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete these stats?');">
+                                        Delete
+                                    </a>
                                 </td>
                             </tr>
                             {% empty %}

@@ -4,6 +4,7 @@ from django.db import models
 class Story(models.Model):
     story_title = models.CharField(max_length=100)
     story_description = models.TextField()
+    img= models.ImageField(upload_to='uploads', null=True,blank=True)
 
 
 class hopitalStats (models.Model):

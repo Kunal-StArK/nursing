@@ -236,7 +236,7 @@ def story(request):
 @login_required(login_url='login')
 def add_story(request):
     if request.method == 'POST':
-        form = Addstory(request.POST)
+        form = Addstory(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('story')
@@ -248,7 +248,7 @@ def add_story(request):
 def edit_story(request,pk):
     story = get_object_or_404(Story,pk=pk)
     if request.method == 'POST':
-        form = EditStory(request.POST, instance=story)
+        form = EditStory(request.POST, request.FILES, instance=story)
         if form.is_valid():
             form.save()
             return redirect ('story')
@@ -256,6 +256,11 @@ def edit_story(request,pk):
         form = EditStory (instance=story)
     return render(request,'edit_story.html',{'form': form})
 
+@login_required(login_url='login')
+def delete_story(request, pk):
+    story = get_object_or_404(Story, pk=pk)
+    story.delete()
+    return redirect('story')
 
 
 # views for stats
@@ -286,6 +291,12 @@ def edit_stats(request,pk):
     else:
         form = EditStats(instance=stats)
     return render (request,'edit_stats.html',{'form':form})
+
+@login_required(login_url='login')
+def delete_stats(request, pk):
+    stats = get_object_or_404(hopitalStats, pk=pk)
+    stats.delete()
+    return redirect('stats')
 
 
 #contact US
