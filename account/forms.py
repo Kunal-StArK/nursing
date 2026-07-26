@@ -160,12 +160,12 @@ class EditStats(forms.ModelForm):
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter Password'}))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder': 'Confirm password'}))
+    first_name = forms.CharField(max_length=150,required=True,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}))
 
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'phone_number', 'email', 'password']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),

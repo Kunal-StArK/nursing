@@ -30,20 +30,24 @@ def registerview(request):
             user = form.save()
 
             # User Activation
-            current_site = get_current_site(request)
-            mail_subject = 'Please activate your account'
-            email_body = render_to_string('accounts/account_varification_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user)
-            })
-            to_email = user.email
-            send_email = EmailMessage(mail_subject, email_body, to=[to_email])
-            send_email.send()
-
-            #messages.success(request, "Registration Successful. we have send a mail to your email adderss {user.email} Please verify it.")
-            return redirect('/account/login/?command=verification&email='+user.email)
+            try:
+                current_site = get_current_site(request)
+                mail_subject = 'Please activate your account'
+                email_body = render_to_string('accounts/account_varification_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user)
+                })
+                to_email = user.email
+                send_email = EmailMessage(mail_subject, email_body, to=[to_email])
+                send_email.send()
+                messages.success(request, "Registration Successful. Please verify your email to login.")
+            except Exception as e:
+                # Avoid crashing with 500 error if SMTP is not configured
+                messages.warning(request, "Registration successful! However, we could not send the activation email. Please contact the administrator to activate your account.")
+            
+            return redirect('register')
     else:
         form = RegisterForm()
     return render(request, 'accounts/register.html', {'form': form})
