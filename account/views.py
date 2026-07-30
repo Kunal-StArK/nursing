@@ -27,9 +27,16 @@ def registerview(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            try:
+                user = form.save()
+            except Exception as e:
+                import traceback
+                print(f"[REGISTRATION ERROR - form.save()] {e}")
+                print(traceback.format_exc())
+                messages.error(request, "Registration failed due to a server error. Please try again.")
+                return render(request, 'accounts/register.html', {'form': form})
 
-            # User Activation
+            # User Activation Email
             try:
                 current_site = get_current_site(request)
                 mail_subject = 'Please activate your account'
@@ -44,7 +51,9 @@ def registerview(request):
                 send_email.send()
                 messages.success(request, "Registration Successful. Please verify your email to login.")
             except Exception as e:
-                # Avoid crashing with 500 error if SMTP is not configured
+                import traceback
+                print(f"[REGISTRATION ERROR - email sending] {e}")
+                print(traceback.format_exc())
                 messages.warning(request, "Registration successful! However, we could not send the activation email. Please contact the administrator to activate your account.")
             
             return redirect('register')
